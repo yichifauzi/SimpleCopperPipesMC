@@ -7,7 +7,6 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -105,7 +104,7 @@ public class PoweredPipeDispenses {
             double velY = getVelY(axis, direction.getStepY(), i);
             double velZ = getVelZ(axis, direction.getStepZ(), i);
             Arrow shotEntity = new Arrow(world, d, e, f, stack, null);
-            shotEntity.setPotionContents(stack.getComponents().get(DataComponents.POTION_CONTENTS));
+            shotEntity.(stack.getComponents().get(DataComponents.POTION_CONTENTS));
             shotEntity.pickup = AbstractArrow.Pickup.ALLOWED;
             shotEntity.setDeltaMovement(velX, velY, velZ);
             world.addFreshEntity(shotEntity);

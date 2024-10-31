@@ -19,10 +19,10 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -162,25 +162,22 @@ public class CopperFitting extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!SimpleCopperPipesConfig.get().openableFittings)
-            return super.useWithoutItem(state, level, pos, player, hitResult);
+    @NotNull
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, @NotNull Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+        if (!SimpleCopperPipesConfig.get().openableFittings) return super.use(blockState, level, blockPos, player, hand, blockHitResult);
 
-        BlockEntity blockEntity = level.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand);
+        if (stack.is(SimpleCopperPipesItemTags.IGNORES_COPPER_PIPE_MENU)) {
+            return InteractionResult.PASS;
+        }
+        if (level.isClientSide) return InteractionResult.SUCCESS;
+
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof CopperFittingEntity fittingEntity) {
             player.openMenu(fittingEntity);
             player.awardStat(Stats.CUSTOM.get(RegisterStats.INSPECT_FITTING));
-            return InteractionResult.SUCCESS_NO_ITEM_USED;
         }
-        return InteractionResult.PASS;
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.is(SimpleCopperPipesItemTags.IGNORES_COPPER_PIPE_MENU)) {
-            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-        }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.CONSUME;
     }
 
     @Override
@@ -205,13 +202,14 @@ public class CopperFitting extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType pathComputationType) {
         return false;
     }
 
+
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
-        this.changeOverTime(blockState, serverLevel, blockPos, random);
+        this.applyChangeOverTime(blockState, serverLevel, blockPos, random);
     }
 
     @Override

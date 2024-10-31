@@ -17,8 +17,8 @@ public class SimpleCopperPipesClientNetworking {
     }
 
     public static void receiveNoteParticlePacket() {
-        ClientPlayNetworking.registerGlobalReceiver(SimpleCopperPipesNoteParticlePacket.PACKET_TYPE, (packet, ctx) -> {
-            ClientLevel clientLevel = ctx.client().level;
+        ClientPlayNetworking.registerGlobalReceiver(SimpleCopperPipesNoteParticlePacket.PACKET_TYPE, (packet, player, sender) -> {
+            ClientLevel clientLevel = player.clientLevel;
             BlockPos pos = packet.blockPos();
             Direction direction = packet.direction();
             double x = direction.getStepX() * 0.6D;

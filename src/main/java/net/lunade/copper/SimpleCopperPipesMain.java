@@ -10,7 +10,6 @@ import net.lunade.copper.blocks.block_entity.leaking_pipes.LeakingPipeManager;
 import net.lunade.copper.blocks.properties.CopperPipeProperties;
 import net.lunade.copper.config.SimpleCopperPipesConfig;
 import net.lunade.copper.datafix.SimpleCopperPipesDataFixer;
-import net.lunade.copper.networking.SimpleCopperPipesNetworking;
 import net.lunade.copper.registry.PipeMovementRestrictions;
 import net.lunade.copper.registry.PoweredPipeDispenses;
 import net.lunade.copper.registry.RegisterBlockEntities;
@@ -47,8 +46,6 @@ public class SimpleCopperPipesMain extends FrozenModInitializer {
         PoweredPipeDispenses.init();
         PipeMovementRestrictions.init();
         LeakingPipeDrips.init();
-
-        SimpleCopperPipesNetworking.init();
 
         ServerLifecycleEvents.SERVER_STOPPED.register((server) -> LeakingPipeManager.clearAll());
 

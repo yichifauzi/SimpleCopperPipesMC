@@ -82,7 +82,7 @@ public class RegisterPipeNbtMethods {
     public static void init() {
         register(ResourceLocation.tryBuild("lunade", "default"), (nbt, world, pos, blockState, pipe) -> {
             boolean noteBlock = false;
-            if (BuiltInRegistries.GAME_EVENT.get(nbt.getSavedID()) == GameEvent.NOTE_BLOCK_PLAY.value()) {
+            if (BuiltInRegistries.GAME_EVENT.get(nbt.getSavedID()) == GameEvent.NOTE_BLOCK_PLAY) {
                 pipe.noteBlockCooldown = 40;
                 float volume = 3.0F;
                 BlockPos originPos = BlockPos.containing(nbt.getVec3d());
@@ -96,7 +96,7 @@ public class RegisterPipeNbtMethods {
                     SimpleCopperPipesNoteParticlePacket.sendToAll(world, pos, k, world.getBlockState(pos).getValue(FACING));
                 }
             }
-            world.gameEvent(nbt.getEntity(world), BuiltInRegistries.GAME_EVENT.getHolder(nbt.getSavedID()).orElse(GameEvent.BLOCK_CHANGE), pos);
+            world.gameEvent(nbt.getEntity(world), BuiltInRegistries.GAME_EVENT.get(nbt.getSavedID()), pos);
             if (noteBlock || pipe.noteBlockCooldown > 0) {
                 if (nbt.useCount == 0) {
                     world.sendParticles(new VibrationParticleOption(new BlockPositionSource(nbt.getBlockPos()), 5), nbt.getVec3d().x, nbt.getVec3d().y, nbt.getVec3d().z, 1, 0.0D, 0.0D, 0.0D, 0.0D);

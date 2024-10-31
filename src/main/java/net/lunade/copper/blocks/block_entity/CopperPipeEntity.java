@@ -53,7 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CopperPipeEntity extends AbstractSimpleCopperBlockEntity implements GameEventListener.Provider<VibrationSystem.Listener>, VibrationSystem {
+public class CopperPipeEntity extends AbstractSimpleCopperBlockEntity implements GameEventListener.Holder<VibrationSystem.Listener>, VibrationSystem {
 
     private static final int VIBRATION_RANGE = 8;
     private static final int MAX_TRANSFER_AMOUNT = 1;
@@ -332,7 +332,7 @@ public class CopperPipeEntity extends AbstractSimpleCopperBlockEntity implements
                         itemStack2 = canonShoot(serverLevel, blockPos, itemStack, blockState, shotLength, powered, true, silent);
                     } else {
                         itemStack2 = canonShoot(serverLevel, blockPos, itemStack, blockState, shotLength, powered, false, silent);
-                        serverLevel.levelEvent(LevelEvent.PARTICLES_SHOOT_WHITE_SMOKE, blockPos, direction.get3DDataValue());
+                        serverLevel.levelEvent(LevelEvent.PARTICLES_SHOOT, blockPos, direction.get3DDataValue());
                     }
                     this.setItem(i, itemStack2);
                     return true;
@@ -362,7 +362,7 @@ public class CopperPipeEntity extends AbstractSimpleCopperBlockEntity implements
         }
         if (SimpleCopperPipesConfig.get().dispensing) {
             itemStack2 = itemStack.split(1);
-            serverLevel.levelEvent(LevelEvent.PARTICLES_SHOOT_WHITE_SMOKE, pos, direction.get3DDataValue());
+            serverLevel.levelEvent(LevelEvent.PARTICLES_SHOOT, pos, direction.get3DDataValue());
             spawnItem(serverLevel, itemStack2, shotLength, direction, vec3, direction);
             if (!silent) {
                 serverLevel.gameEvent(null, GameEvent.ENTITY_PLACE, pos);
@@ -497,14 +497,14 @@ public class CopperPipeEntity extends AbstractSimpleCopperBlockEntity implements
         }
 
         @Override
-        public boolean canReceiveVibration(@NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Holder<GameEvent> gameEvent, @Nullable GameEvent.Context context) {
+        public boolean canReceiveVibration(ServerLevel serverLevel, BlockPos blockPos, GameEvent gameEvent, GameEvent.Context context) {
             if (SimpleCopperPipesConfig.get().senseGameEvents) {
                 boolean placeDestroy = gameEvent == GameEvent.BLOCK_DESTROY || gameEvent == GameEvent.BLOCK_PLACE;
                 if ((serverLevel.getBlockState(blockPos).getBlock() instanceof CopperPipe) || (blockPos == CopperPipeEntity.this.getBlockPos() && placeDestroy)) {
                     return false;
                 }
                 if (CopperPipeEntity.this.canAccept) {
-                    CopperPipeEntity.this.moveablePipeDataHandler.addSaveableMoveablePipeNbt(new MoveablePipeDataHandler.SaveableMovablePipeNbt(gameEvent.value(), Vec3.atCenterOf(blockPos), context, CopperPipeEntity.this.getBlockPos()).withShouldMove(true).withShouldSave(true));
+                    CopperPipeEntity.this.moveablePipeDataHandler.addSaveableMoveablePipeNbt(new MoveablePipeDataHandler.SaveableMovablePipeNbt(gameEvent, Vec3.atCenterOf(blockPos), context, CopperPipeEntity.this.getBlockPos()).withShouldMove(true).withShouldSave(true));
                     return true;
                 }
             }
@@ -512,7 +512,7 @@ public class CopperPipeEntity extends AbstractSimpleCopperBlockEntity implements
         }
 
         @Override
-        public void onReceiveVibration(@NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Holder<GameEvent> gameEvent, @Nullable Entity entity, @Nullable Entity entity2, float f) {
+        public void onReceiveVibration(ServerLevel serverLevel, BlockPos blockPos, GameEvent gameEvent, @Nullable Entity entity, @Nullable Entity entity2, float f) {
 
         }
 
