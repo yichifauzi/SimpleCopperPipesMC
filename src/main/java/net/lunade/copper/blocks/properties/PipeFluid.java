@@ -1,20 +1,18 @@
 package net.lunade.copper.blocks.properties;
 
-import net.lunade.copper.CopperPipeMain;
+import java.util.Optional;
+import net.lunade.copper.registry.RegisterPipeNbtMethods;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
-
 public enum PipeFluid implements StringRepresentable {
     NONE("none", Optional.empty()),
-    WATER("water", Optional.of(CopperPipeMain.WATER)),
-    LAVA("lava", Optional.of(CopperPipeMain.LAVA)),
-    SMOKE("smoke", Optional.of(CopperPipeMain.SMOKE));
-
-    private final String name;
+    WATER("water", Optional.of(RegisterPipeNbtMethods.WATER)),
+    LAVA("lava", Optional.of(RegisterPipeNbtMethods.LAVA)),
+    SMOKE("smoke", Optional.of(RegisterPipeNbtMethods.SMOKE));
     public final Optional<ResourceLocation> nbtID;
+    private final String name;
 
     PipeFluid(String name, Optional<ResourceLocation> nbtID) {
         this.name = name;
