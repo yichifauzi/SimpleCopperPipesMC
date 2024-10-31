@@ -5,10 +5,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import net.lunade.copper.blocks.block_entity.AbstractSimpleCopperBlockEntity;
 import net.lunade.copper.blocks.block_entity.CopperPipeEntity;
 import net.lunade.copper.registry.RegisterPipeNbtMethods;
@@ -28,6 +24,11 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class MoveablePipeDataHandler {
 

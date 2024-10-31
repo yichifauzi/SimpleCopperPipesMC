@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
-import java.util.function.BiFunction;
 import net.lunade.copper.SimpleCopperPipesSharedConstants;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.util.datafix.fixes.AddNewChoices;
@@ -12,6 +11,8 @@ import net.minecraft.util.datafix.fixes.References;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
+
+import java.util.function.BiFunction;
 
 @Mixin(DataFixers.class)
 public class DataFixersMixin {

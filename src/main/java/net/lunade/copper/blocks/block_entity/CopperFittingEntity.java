@@ -11,7 +11,6 @@ import net.lunade.copper.registry.RegisterBlockEntities;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -151,14 +150,14 @@ public class CopperFittingEntity extends AbstractSimpleCopperBlockEntity {
     }
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag nbtCompound, HolderLookup.@NotNull Provider lookupProvider) {
-        super.loadAdditional(nbtCompound, lookupProvider);
+    public void load(@NotNull CompoundTag nbtCompound) {
+        super.load(nbtCompound);
         this.transferCooldown = nbtCompound.getInt("transferCooldown");
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbtCompound, HolderLookup.@NotNull Provider lookupProvider) {
-        super.saveAdditional(nbtCompound, lookupProvider);
+    protected void saveAdditional(@NotNull CompoundTag nbtCompound) {
+        super.saveAdditional(nbtCompound);
         nbtCompound.putInt("transferCooldown", this.transferCooldown);
     }
 

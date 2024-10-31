@@ -1,8 +1,5 @@
 package net.lunade.copper.blocks.block_entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import net.lunade.copper.SimpleCopperPipesMain;
 import net.lunade.copper.SimpleCopperPipesSharedConstants;
 import net.lunade.copper.blocks.block_entity.pipe_nbt.MoveablePipeDataHandler;
@@ -14,7 +11,6 @@ import net.lunade.copper.tag.SimpleCopperPipesBlockTags;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -36,6 +32,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class AbstractSimpleCopperBlockEntity extends RandomizableContainerBlockEntity implements Container {
 
@@ -214,11 +214,11 @@ public class AbstractSimpleCopperBlockEntity extends RandomizableContainerBlockE
     }
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag nbtCompound, HolderLookup.@NotNull Provider lookupProvider) {
-        super.loadAdditional(nbtCompound, lookupProvider);
+    public void load(@NotNull CompoundTag nbtCompound) {
+        super.load(nbtCompound);
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if (!this.tryLoadLootTable(nbtCompound)) {
-            ContainerHelper.loadAllItems(nbtCompound, this.inventory, lookupProvider);
+            ContainerHelper.loadAllItems(nbtCompound, this.inventory);
         }
         this.waterCooldown = nbtCompound.getInt("WaterCooldown");
         this.electricityCooldown = nbtCompound.getInt("electricityCooldown");
@@ -230,10 +230,10 @@ public class AbstractSimpleCopperBlockEntity extends RandomizableContainerBlockE
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbtCompound, HolderLookup.@NotNull Provider lookupProvider) {
-        super.saveAdditional(nbtCompound, lookupProvider);
+    protected void saveAdditional(@NotNull CompoundTag nbtCompound) {
+        super.saveAdditional(nbtCompound);
         if (!this.trySaveLootTable(nbtCompound)) {
-            ContainerHelper.saveAllItems(nbtCompound, this.inventory, lookupProvider);
+            ContainerHelper.saveAllItems(nbtCompound, this.inventory);
         }
         nbtCompound.putInt("WaterCooldown", this.waterCooldown);
         nbtCompound.putInt("electricityCooldown", this.electricityCooldown);

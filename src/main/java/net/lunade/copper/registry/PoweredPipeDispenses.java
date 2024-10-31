@@ -1,7 +1,6 @@
 package net.lunade.copper.registry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import java.util.Map;
 import net.lunade.copper.blocks.block_entity.CopperPipeEntity;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -9,21 +8,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.SmallFireball;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.SpectralArrow;
-import net.minecraft.world.entity.projectile.ThrownEgg;
-import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
-import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class PoweredPipeDispenses {
 

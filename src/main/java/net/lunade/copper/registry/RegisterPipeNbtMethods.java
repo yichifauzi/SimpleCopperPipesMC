@@ -1,7 +1,6 @@
 package net.lunade.copper.registry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import java.util.Map;
 import net.lunade.copper.SimpleCopperPipesSharedConstants;
 import net.lunade.copper.blocks.block_entity.AbstractSimpleCopperBlockEntity;
 import net.lunade.copper.blocks.block_entity.CopperFittingEntity;
@@ -16,14 +15,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.Blocks;
-import static net.minecraft.world.level.block.NoteBlock.INSTRUMENT;
-import static net.minecraft.world.level.block.NoteBlock.NOTE;
 import net.minecraft.world.level.block.state.BlockState;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 import net.minecraft.world.level.gameevent.BlockPositionSource;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+
+import static net.minecraft.world.level.block.NoteBlock.INSTRUMENT;
+import static net.minecraft.world.level.block.NoteBlock.NOTE;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
 public class RegisterPipeNbtMethods {
     public static final ResourceLocation WATER = SimpleCopperPipesSharedConstants.id("water");

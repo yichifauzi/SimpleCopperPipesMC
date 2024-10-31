@@ -30,7 +30,8 @@ public class WrenchItemMixin {
                     target = "Lcom/simibubi/create/content/equipment/wrench/WrenchItem;onItemUseOnOther(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult;"
             ),
             locals = LocalCapture.CAPTURE_FAILHARD,
-            cancellable = true
+            cancellable = true,
+            remap = false
     )
     private void simpleCopperPipes$wrenchPickup(UseOnContext context, CallbackInfoReturnable<InteractionResult> info, Player player, BlockState state, Block block) {
         this.simpleCopperPipes$rotateCopperPipes(context, info);

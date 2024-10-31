@@ -51,7 +51,7 @@ public class HoeItemMixin {
                 level.setBlockAndUpdate(blockPos, state);
                 level.playSound(null, blockPos, RegisterSoundEvents.TURN, SoundSource.BLOCKS, 0.5F, 1F);
                 if (playerEntity != null) {
-                    itemUsageContext.getItemInHand().hurtAndBreak(1, playerEntity, LivingEntity.getSlotForHand(itemUsageContext.getHand()));
+                    itemUsageContext.getItemInHand().hurtAndBreak(1, playerEntity, playerx -> playerx.broadcastBreakEvent(itemUsageContext.getHand()));
                 }
             }
             info.setReturnValue(InteractionResult.sidedSuccess(level.isClientSide));

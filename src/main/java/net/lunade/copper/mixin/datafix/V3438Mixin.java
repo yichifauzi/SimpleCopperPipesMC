@@ -5,13 +5,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.datafixers.DSL;
 import com.mojang.datafixers.schemas.Schema;
 import com.mojang.datafixers.types.templates.TypeTemplate;
-import java.util.Map;
-import java.util.function.Supplier;
 import net.lunade.copper.SimpleCopperPipesSharedConstants;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.util.datafix.schemas.V3438;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.Map;
+import java.util.function.Supplier;
 
 @Mixin(V3438.class)
 public class V3438Mixin {

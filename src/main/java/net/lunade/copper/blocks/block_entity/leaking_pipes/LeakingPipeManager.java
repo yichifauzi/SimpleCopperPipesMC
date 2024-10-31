@@ -1,6 +1,5 @@
 package net.lunade.copper.blocks.block_entity.leaking_pipes;
 
-import java.util.ArrayList;
 import net.lunade.copper.blocks.CopperPipe;
 import net.lunade.copper.blocks.properties.CopperPipeProperties;
 import net.lunade.copper.blocks.properties.PipeFluid;
@@ -15,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.ArrayList;
 
 public class LeakingPipeManager {
 
