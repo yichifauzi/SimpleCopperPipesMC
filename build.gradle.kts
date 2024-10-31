@@ -221,7 +221,7 @@ tasks {
 	withType(JavaCompile::class) {
 		options.encoding = "UTF-8"
 		// Minecraft 1.20.5 (24w14a) upwards uses Java 21.
-		options.release.set(21)
+		options.release.set(17)
 		options.isFork = true
 		options.isIncremental = true
 	}
@@ -243,7 +243,7 @@ val javadocJar: Task by tasks
 tasks.withType(JavaCompile::class) {
 	options.encoding = "UTF-8"
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	options.release = 21
+	options.release = 17
 	options.isFork = true
 	options.isIncremental = true
 }
@@ -253,8 +253,8 @@ tasks.withType(Test::class) {
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 
 	withSourcesJar()
 }
