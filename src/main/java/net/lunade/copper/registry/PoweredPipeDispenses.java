@@ -75,7 +75,7 @@ public class PoweredPipeDispenses {
             double velX = getVelX(axis, direction.getStepX(), i);
             double velY = getVelY(axis, direction.getStepY(), i);
             double velZ = getVelZ(axis, direction.getStepZ(), i);
-            Arrow shotEntity = new Arrow(world, d, e, f, stack, null);
+            Arrow shotEntity = new Arrow(world, d, e, f);
             shotEntity.pickup = AbstractArrow.Pickup.ALLOWED;
             shotEntity.setDeltaMovement(velX, velY, velZ);
             world.addFreshEntity(shotEntity);
@@ -89,7 +89,7 @@ public class PoweredPipeDispenses {
             double velX = getVelX(axis, direction.getStepX(), i);
             double velY = getVelY(axis, direction.getStepY(), i);
             double velZ = getVelZ(axis, direction.getStepZ(), i);
-            SpectralArrow shotEntity = new SpectralArrow(world, d, e, f, stack, null);
+            SpectralArrow shotEntity = new SpectralArrow(world, d, e, f);
             shotEntity.pickup = AbstractArrow.Pickup.ALLOWED;
             shotEntity.setDeltaMovement(velX, velY, velZ);
             world.addFreshEntity(shotEntity);
@@ -103,8 +103,8 @@ public class PoweredPipeDispenses {
             double velX = getVelX(axis, direction.getStepX(), i);
             double velY = getVelY(axis, direction.getStepY(), i);
             double velZ = getVelZ(axis, direction.getStepZ(), i);
-            Arrow shotEntity = new Arrow(world, d, e, f, stack, null);
-            shotEntity.(stack.getComponents().get(DataComponents.POTION_CONTENTS));
+            Arrow shotEntity = new Arrow(world, d, e, f);
+            shotEntity.setEffectsFromItem(stack);
             shotEntity.pickup = AbstractArrow.Pickup.ALLOWED;
             shotEntity.setDeltaMovement(velX, velY, velZ);
             world.addFreshEntity(shotEntity);
@@ -187,7 +187,7 @@ public class PoweredPipeDispenses {
             double velX = getVelX(axis, direction.getStepX(), i);
             double velY = getVelY(axis, direction.getStepY(), i);
             double velZ = getVelZ(axis, direction.getStepZ(), i);
-            SmallFireball smallFireballEntity = new SmallFireball(world, d, e, f, new Vec3(velX, velY, velZ));
+            SmallFireball smallFireballEntity = new SmallFireball(world, d, e, f, velX, velY, velZ);
             world.addFreshEntity(Util.make(smallFireballEntity, (smallFireballEntityx) -> smallFireballEntityx.setItem(stack)));
             smallFireballEntity.setDeltaMovement(velX, velY, velZ);
         });
